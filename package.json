@@ -1,0 +1,12 @@
+{
+  "name"         : "site-objectifs",
+  "version"      : "0.1.0",
+  "description"  : "Site for objectives.",
+  "main"         : "server.js",
+  "author"       : "Pierre",
+  "dependencies" : {
+    "express"         : "~4.6.1",
+    "redis"           : "~2.1.0",
+    "jquery"          : "~2.1.4"
+  }
+}

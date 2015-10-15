@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="objectives-store">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+</head>
+<body ng-controller="ObjectivesController as objs" >
+  <script src="js/ext/angular.min.js"></script>
+   <script src="js/ext/jquery.min.js"></script>
+  <script type="text/javascript" src="js/core.js" ></script>
+  <script type="text/javascript" src="js/controller/objectives_controller.js" ></script>
+  <h1>My objectives are important!</h1>
+
+  <section ng-controller="PanelController as panel">
+    <ul class="nav nav-pills">
+      <li ng-class="{active:panel.isSelected('day')}"><a href ng-click="panel.selectTab('day')">Today</a></li>
+      <li ng-class="{active:panel.isSelected('week')}"><a href ng-click="panel.selectTab('week')">This Week</a></li>
+      <li ng-class="{active:panel.isSelected('month')}"><a href ng-click="panel.selectTab('month')">This Month</a></li>
+      <li ng-class="{active:panel.isSelected('year')}"><a href ng-click="panel.selectTab('year')">This Year</a></li>
+    </ul>
+    <div class="panel" id="panel"> 
+      <ul class="list-group" ng-repeat="objective in objs.objectives">
+        <li class="list-group-item" ng-show="panel.isSelected(objective.period)">
+          <objective-element></objective-element>
+        </li>
+      </ul>        
+    </div>  
+  </section>
+
+<!--   <form name="testForm" ng-submit="test.submit()" ng-controller="testController as test">
+    <pre>{{ test.field }}</pre>
+    <input type="submit" />
+  </form>
+ -->
+
+
+  <form name="newObjectiveForm" ng-controller="NewObjectiveController as newObjective" ng-submit="newObjective.submit(newObjective)">
+  <!-- newObjective.addObjective(objective) -->
+    <!-- New Objective Preview -->
+    <blockquote ng-show="newObjective.objective.time">
+      <h4>{{newObjective.objective.title}} {{ " [ " + newObjective.objective.time + " ]" }}</h4>
+      {{newObjective.objective.description}}
+    </blockquote>
+    <!-- New Objective Form -->
+    <h3>New objective...</h3>
+    <br/>
+    <label>Period </label>
+    <select ng-model="newObjective.objective.period" required>
+      <option value="day">Today</option>
+      <option value="week">This Week</option>
+      <option value="month">This Month</option>
+      <option value="year">This Year</option>
+    </select>
+    <label>Title </label>
+    <input type="text" ng-model="newObjective.objective.title" required/>
+    <label>Time </label>
+    <input type="text" ng-model="newObjective.objective.time" required/>
+    <br/>
+    <label>Description</label>
+    <textarea ng-model="newObjective.objective.description"></textarea>
+    <input type="submit" value="Submit"/>
+  </form>
+
+  <!-- 
+  <form name="newObjectiveForm" ng-submit="newObjective.submit()" ng-controller="newObjectiveController as newObjective">
+    <pre>{{ newObjective.field }}</pre>
+    <input type="submit" />
+  </form> -->
+</body>
+</html>
